@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LearnPal Chatbot</title>
+
+  <!-- Mermaid.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #fafafa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      color: #7b5ea6;
+      margin-bottom: 0.2em;
+    }
+
+    p {
+      color: #f06292;
+      font-size: 1.1rem;
+      margin-top: 0;
+      margin-bottom: 1.5em;
+    }
+
+    /* Mermaid Diagram Style */
+    .mermaid {
+      max-width: 600px;
+      margin: 40px auto;
+      background-color: #f9f7fb;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(123, 94, 166, 0.2);
+      text-align: left; /* Mermaid diagrams are left aligned by default */
+    }
+
+    /* Dialogflow Custom Colors */
+    df-messenger {
+      --df-messenger-button-titlebar-color: #7b5ea6;
+      --df-messenger-chat-background-color: #fafafa;
+      --df-messenger-bot-message: #e9d7f5;
+      --df-messenger-user-message: #d8a8be;
+      --df-messenger-send-icon: #f06292;
+      --df-messenger-input-border-color: #7b5ea6;
+      --df-messenger-button-send-background-color: #f06292;
+      --df-messenger-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .button-container {
+      margin-top: 20px;
+    }
+
+    button {
+      background-color: #7b5ea6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin: 5px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #664e8b;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 25px;
+      border: 2px solid #7b5ea6;
+      color: #7b5ea6;
+      margin: 5px;
+      transition: border-color 0.3s ease;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #f06292;
+      color: #f06292;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to LearnPal</h1>
+  <p>I'm your AI tutor. Ask me anything!</p>
+
+  <h2>AI Concepts Flowchart</h2>
+  <div class="mermaid">
+    graph TD
+      AI --> ML
+      ML --> DeepLearning[Deep Learning]
+      DeepLearning --> NLP
+      AI --> ComputerVision[Computer Vision]
+      AI --> Robotics[Robotics]
+  </div>
+
+  <!-- Chatbot -->
+  <df-messenger
+    chat-title="LearnPal"
+    agent-id="b01292df-5f87-4da4-b20e-7ec9cab93f37"
+    language-code="en"
+  ></df-messenger>
+
+  <div class="button-container">
+    <select id="moduleSelect" aria-label="Select Bootcamp Module">
+      <option value="">📘 Select a Module</option>
+      <option value="https://www.coursera.org/learn/introduction-to-ai/home/module/1">Module 1: AI Basics</option>
+      <option value="https://www.w3schools.com/ai/default.asp">Module 2: Machine Learning</option>
+      <option value="https://www.geeksforgeeks.org/top-7-applications-of-natural-language-processing/">Module 3: NLP</option>
+      <option value="https://www.geeksforgeeks.org/ai-ethics/">Module 4: AI Ethics</option>
+    </select>
+    <button class="module-btn" onclick="openModule()">📚 Go to Module</button>
+  </div>
+
+  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+  <script>
+    function openModule() {
+      const select = document.getElementById("moduleSelect");
+      const url = select.value;
+      if (url) {
+        window.open(url, "_blank");
+      } else {
+        alert("Please select a module to learn more.");
+      }
+    }
+  </script>
+</body>
+</html>
